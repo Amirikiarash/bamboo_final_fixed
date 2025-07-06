@@ -111,7 +111,7 @@ Confidence: 94.12%
 ## 📍 Author
 
 **Kiarash Amiri**  
-🧠 AI + Mobile Dev | 🇮🇷 Based in China  
+🧠 Machine Learning + Mobile Dev | 🇮🇷 Based in China  
 GitHub: [@Amirikiarash](https://github.com/Amirikiarash)
 
 ---
