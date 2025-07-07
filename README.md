@@ -102,7 +102,7 @@ flutter build apk --release
 When an image is selected, the model returns predictions like:
 
 ```text
-Predicted Class: Bamboo Culm
+Predicted Class: Five Ways
 Confidence: 94.12%
 ```
 
