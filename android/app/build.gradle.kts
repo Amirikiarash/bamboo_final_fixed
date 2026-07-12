@@ -28,13 +28,12 @@ android {
 
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = true
-            isShrinkResources = true
+            // Code/resource shrinking is disabled so the release APK builds
+            // reliably (R8 can strip TFLite JNI classes). Re-enable with proper
+            // keep rules once the app is stable.
+            isMinifyEnabled = false
+            isShrinkResources = false
             signingConfig = signingConfigs.getByName("debug")
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                file("proguard-rules.pro")
-            )
         }
     }
 }

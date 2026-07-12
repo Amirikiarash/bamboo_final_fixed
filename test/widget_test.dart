@@ -1,30 +1,23 @@
-// This is a basic Flutter widget test.
+// Smoke test for the Bamboo Weave Classifier app shell.
 //
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+// The TFLite model cannot load in a host `flutter test` (no native runtime),
+// so the app enters its error state gracefully; this test only checks that the
+// shell renders and the capture controls are present.
 
+import 'package:bambooapp/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:bambooapp/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
+  testWidgets('renders the app shell and capture controls',
+      (WidgetTester tester) async {
     await tester.pumpWidget(const BambooApp());
+    await tester.pump(); // start initState / model load
+    await tester.pump(const Duration(seconds: 1)); // let the load future settle
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Bamboo Weave Classifier'), findsOneWidget);
+    expect(find.text('Camera'), findsOneWidget);
+    expect(find.text('Gallery'), findsOneWidget);
+    expect(find.byType(ElevatedButton), findsNWidgets(2));
   });
 }

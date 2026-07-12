@@ -11,7 +11,7 @@ class BambooApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bamboo Classifier',
+      title: 'Bamboo Weave Classifier',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
