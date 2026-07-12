@@ -56,7 +56,7 @@ class ClassificationResult {
 
 /// Numerically stable softmax.
 List<double> softmax(List<double> z) {
-  final maxZ = z.reduce(math.max);
+  final maxZ = z.reduce((a, b) => math.max(a, b));
   final exps = z.map((v) => math.exp(v - maxZ)).toList();
   final sum = exps.fold<double>(0.0, (a, b) => a + b);
   return exps.map((v) => v / sum).toList();

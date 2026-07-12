@@ -134,7 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class _AcceptedCard extends StatelessWidget {
   final ClassificationResult result;
-  const _AcceptedCard({required this.result});
+  const _AcceptedCard({super.key, required this.result});
 
   @override
   Widget build(BuildContext context) {
@@ -174,7 +174,7 @@ class _AcceptedCard extends StatelessWidget {
 
 class _RejectedCard extends StatelessWidget {
   final ClassificationResult result;
-  const _RejectedCard({required this.result});
+  const _RejectedCard({super.key, required this.result});
 
   @override
   Widget build(BuildContext context) {
@@ -194,7 +194,7 @@ class _RejectedCard extends StatelessWidget {
 class _ProbBar extends StatelessWidget {
   final String label;
   final double value;
-  const _ProbBar({required this.label, required this.value});
+  const _ProbBar({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -214,7 +214,7 @@ class _ProbBar extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(4),
             child: LinearProgressIndicator(
-              value: value.clamp(0.0, 1.0),
+              value: value.clamp(0.0, 1.0).toDouble(),
               minHeight: 6,
               backgroundColor: Colors.green.withAlpha(31),
             ),
@@ -231,6 +231,7 @@ class _InfoCard extends StatelessWidget {
   final String title;
   final String body;
   const _InfoCard({
+    super.key,
     required this.color,
     required this.icon,
     required this.title,
@@ -271,7 +272,8 @@ class _InfoCard extends StatelessWidget {
 class _ModelErrorBanner extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;
-  const _ModelErrorBanner({required this.message, required this.onRetry});
+  const _ModelErrorBanner(
+      {super.key, required this.message, required this.onRetry});
 
   @override
   Widget build(BuildContext context) {
@@ -303,7 +305,7 @@ class _ModelErrorBanner extends StatelessWidget {
 
 class _Centered extends StatelessWidget {
   final Widget child;
-  const _Centered({required this.child});
+  const _Centered({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) =>
