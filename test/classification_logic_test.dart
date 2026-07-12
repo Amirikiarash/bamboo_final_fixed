@@ -30,7 +30,7 @@ void main() {
       expect(normalisedEntropy([1.0, 0.0, 0.0, 0.0]), closeTo(0.0, 1e-9));
     });
     test('is 1 for a uniform distribution', () {
-      final n = 14;
+      const n = 14;
       final uniform = List.filled(n, 1 / n);
       expect(normalisedEntropy(uniform), closeTo(1.0, 1e-9));
     });
@@ -76,7 +76,7 @@ void main() {
     });
 
     test('honours custom thresholds', () {
-      final vec = [3.2, 1.0, 0.5, 0.2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      final vec = <double>[3.2, 1.0, 0.5, 0.2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       // Default thresholds accept this moderate prediction...
       expect(interpretOutput(vec, labels).accepted, isTrue);
       // ...but a strict confidence floor rejects it.

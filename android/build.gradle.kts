@@ -19,6 +19,18 @@ subprojects {
     project.evaluationDependsOn(":app")
 }
 
+// Some plugins (e.g. tflite_flutter) compile Java to 1.8 while Kotlin targets
+// 17, which fails the Gradle "Inconsistent JVM-target" check. Force every
+// subproject's Java compilation to 17 to match Kotlin.
+subprojects {
+    afterEvaluate {
+        tasks.withType<JavaCompile>().configureEach {
+            sourceCompatibility = JavaVersion.VERSION_17.toString()
+            targetCompatibility = JavaVersion.VERSION_17.toString()
+        }
+    }
+}
+
 tasks.register<Delete>("clean") {
     delete(rootProject.layout.buildDirectory)
 }
