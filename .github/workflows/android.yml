@@ -23,7 +23,7 @@ jobs:
           channel: stable
       - run: flutter pub get
       - name: build
-        run: flutter build apk --release --stacktrace > build.txt 2>&1 || true
+        run: flutter build apk --release > build.txt 2>&1 || true
       - name: publish build log to ci-logs branch
         run: |
           mkdir -p _cilogs
