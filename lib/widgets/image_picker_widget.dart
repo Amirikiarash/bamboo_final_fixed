@@ -46,7 +46,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
               : Container(
                   height: 220,
                   width: double.infinity,
-                  color: Colors.green.withOpacity(0.08),
+                  color: Colors.green.withAlpha(20),
                   alignment: Alignment.center,
                   child: const Text(
                     'No image selected',

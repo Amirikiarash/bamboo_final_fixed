@@ -216,7 +216,7 @@ class _ProbBar extends StatelessWidget {
             child: LinearProgressIndicator(
               value: value.clamp(0.0, 1.0),
               minHeight: 6,
-              backgroundColor: Colors.green.withOpacity(0.12),
+              backgroundColor: Colors.green.withAlpha(31),
             ),
           ),
         ],
@@ -279,9 +279,9 @@ class _ModelErrorBanner extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: Colors.red.withOpacity(0.08),
+        color: Colors.red.withAlpha(20),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.red.withOpacity(0.4)),
+        border: Border.all(color: Colors.red.withAlpha(102)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
