@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  diagnose-build:
-    name: Capture build output
+  build:
+    name: Build APK (with log capture)
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -27,7 +27,7 @@ jobs:
       - name: publish build log to ci-logs branch
         run: |
           mkdir -p _cilogs
-          tail -260 build.txt > _cilogs/build.txt || true
+          tail -60 build.txt > _cilogs/build.txt || true
           git config user.name "ci-bot"
           git config user.email "ci-bot@example.com"
           git checkout --orphan ci-logs
@@ -35,3 +35,9 @@ jobs:
           git add -f _cilogs/build.txt
           git commit -m "CI build log"
           git push -f origin ci-logs
+      - name: upload APK if built
+        uses: actions/upload-artifact@v4
+        with:
+          name: bamboo-release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: warn
