@@ -86,17 +86,25 @@ class TFLiteService {
     final height = inputShape[1];
     final width = inputShape[2];
     final channels = inputShape[3];
-    final numClasses = outputShape[1];
+    final numClasses = outputShape.reduce((a, b) => a * b);
 
     final resized = img.copyResize(image, width: width, height: height);
     final input = _imageToInput(resized, height, width, channels);
 
-    final output =
-        List.filled(numClasses, 0.0).reshape([1, numClasses]);
-    interpreter.run(input, output);
+    // tflite_flutter infers tensor shapes from the objects it is given, so both
+    // input and output must be nested to the model's real shapes — a flat list
+    // is read as a 1-D tensor and fails with a RangeError.
+    final output = List.filled(numClasses, 0.0).reshape(outputShape);
+    interpreter.run(input.reshape(inputShape), output);
 
-    final raw = List<double>.from(output[0].map((v) => (v as num).toDouble()));
+    final raw = _flatten(output).map((v) => v.toDouble()).toList();
     return interpretOutput(raw, _labels, thresholds: thresholds);
+  }
+
+  /// Flattens a nested model output (e.g. [[..14..]]) into a flat list of nums.
+  List<num> _flatten(dynamic x) {
+    if (x is num) return [x];
+    return [for (final e in x as List) ..._flatten(e)];
   }
 
   Float32List _imageToInput(img.Image im, int h, int w, int c) {
