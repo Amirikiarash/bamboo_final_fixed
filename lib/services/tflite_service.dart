@@ -24,7 +24,7 @@ class ModelLoadException implements Exception {
 }
 
 class TFLiteService {
-  static const String _modelAsset = 'model.tflite';
+  static const String _modelAsset = 'assets/model.tflite';
   static const String _labelsAsset = 'assets/labels.txt';
 
   final Normalization normalization;
